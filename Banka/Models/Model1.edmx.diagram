@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e001fca55b41484c8d57893e31a8cbf9" Name="Diagram1">
+        <EntityTypeShape EntityType="BankaModel.Banka" Width="1.5" PointX="10" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Banka_Muduru" Width="1.5" PointX="12.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Banka_Toplam" Width="1.5" PointX="7.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Hesaplar" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.İslemler" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Kredi_Borclari" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Kullanıcılar" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Kur" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Makbuz" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Musteri" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankaModel.Musteri_Temsilcisi" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="BankaModel.FK_Banka_Banka_Toplam" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_Banka_Muduru_Banka" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_Hesaplar_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_İslemler_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_İslemler_Musteri_Temsilcisi" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_Makbuz_İslemler" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_Kredi_Borclari_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="BankaModel.FK_Musteri_Musteri_Temsilcisi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,86 @@
+﻿
+
+@{
+    ViewBag.Title = "Transfer";
+}
+@using Banka.Models;
+
+@model List<Hesaplar>
+
+
+<div class="container-scroller">
+    @Html.Partial("PartialView");
+
+
+    <!-- partial -->
+    <div class="main-panel">
+            <div class="page-header">
+                <h3 class="page-title"> TR Hesapları Arasında Transfer </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Hesaplar Arası Transfer</h4>
+                            @Session["mesaj"]
+                            @{ 
+                                Session["mesaj"] = "";
+                            }
+                            <p class="card-description">  </p>
+                            <form class="forms-sample" action="/Hesap/Gonder/" method="post" role="form">
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Gönderecek Hesap ID</label>
+
+
+
+                                    <select class="form-control" name="id">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.hesap_id">@item.hesap_id</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Gönderilecek Hesap ID</label>
+
+
+
+                                    <select class="form-control" name="id1">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.hesap_id">@item.hesap_id</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+
+                                    <label for="exampleInputName1">Gönderilecek Miktar</label>
+
+                                    <input type="text" class="form-control" name="bakiye">
+
+
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary gonder">Aktar</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>

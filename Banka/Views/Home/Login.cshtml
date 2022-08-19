@@ -1,0 +1,95 @@
+﻿@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Aldi Duzha" />
+    <meta name="description" content="Free Bulma Login Template, part of Awesome Bulma Templates" />
+    <meta name="keywords" content="bulma, login, page, website, template, free, awesome" />
+    <link rel="canonical" href="https://aldi.github.io/bulma-login-template/" />
+    <title>Banka</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@1/bin/bulma-social.min.css" />
+    <link rel="stylesheet" href="/Content/assets/css/all.min.css" />
+    <link rel="stylesheet" href="/Content/assets/css/styles.css" />
+</head>
+<body>
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <div class="box">
+                        <p class="subtitle is-4">Giriş Bilgilerinizi Giriniz</p>
+                        @ViewBag.mesaj
+                        <br />
+                        <form role="form" class="login-form form-horizontal" method="post" action="/Home/Login/">
+
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input is-medium" type="text" placeholder="TC" name="TC" />
+                                    <span class="icon is-medium is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-medium is-right">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input class="input is-medium" type="password" placeholder="Şifre" name="sifre" />
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    Beni Hatırla
+                                </label>
+                            </div>
+                            <button class="button is-block is-info is-large is-fullwidth">Giriş</button><br />
+                            <p class="subtitle is-5">Sosyal Medyadan Takip Edin.</p>
+                            <div class="buttons is-centered" style="margin-bottom: 0;">
+                                <a class="button is-medium is-facebook mr-2">
+                                    <span class="icon">
+                                        <i class="fab fa-facebook fa-lg"></i>
+                                    </span>
+                                </a>
+                                <a class="button is-medium is-twitter">
+                                    <span class="icon">
+                                        <i class="fab fa-twitter fa-lg"></i>
+                                    </span>
+                                </a>
+                                <a class="button is-medium is-github">
+                                    <span class="icon">
+                                        <i class="fab fa-github fa-lg"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="#"></a> &nbsp;·&nbsp; <a href="#"></a> &nbsp;·&nbsp;
+                        <a href="#"></a>
+                    </p>
+                    <div class="languages select is-small is-rounded">
+                        <select>
+                            <option selected>Admin</option>
+                            <option>Müşteri</option>
+                            <option>Müşteri_Temsilcisi</option>
+                            <option>Italian</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
+</body>
+</html>

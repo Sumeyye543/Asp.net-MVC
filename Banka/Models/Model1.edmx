@@ -1,0 +1,720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BankaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banka">
+          <Key>
+            <PropertyRef Name="banka_id" />
+          </Key>
+          <Property Name="banka_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="durum_id" Type="int" Nullable="false" />
+          <Property Name="banka_tel" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="banka_adresi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="banka_eposta" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banka_Muduru">
+          <Key>
+            <PropertyRef Name="mudur_Tc" />
+          </Key>
+          <Property Name="banka_id" Type="int" Nullable="false" />
+          <Property Name="mudur_adi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_soyadi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_Tc" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_Tel" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_Adres" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_Eposta" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="mudur_sifre" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banka_Toplam">
+          <Key>
+            <PropertyRef Name="durum_id" />
+          </Key>
+          <Property Name="durum_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ay" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="gelir_durumu" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="gider_durumu" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="toplam_bakiye" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hesaplar">
+          <Key>
+            <PropertyRef Name="hesap_id" />
+          </Key>
+          <Property Name="hesap_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hesap_turu" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="hesap_bakiye" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="musteri_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="İslemler">
+          <Key>
+            <PropertyRef Name="islem_id" />
+          </Key>
+          <Property Name="islem_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="islem_adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="islem_bakiye" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="islem_tarihi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="musteri_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="temsilci_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kredi_Borclari">
+          <Key>
+            <PropertyRef Name="kredi_id" />
+          </Key>
+          <Property Name="kredi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kredi_ayi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="kredi_turu" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="kredi_miktari" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="musteri_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="Tc" />
+          </Key>
+          <Property Name="Tc" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adı_Soyadı" Type="nchar" MaxLength="50" />
+          <Property Name="sifre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="tip" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kur">
+          <Key>
+            <PropertyRef Name="kur_id" />
+          </Key>
+          <Property Name="kur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kur_adi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="kur_miktari" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Makbuz">
+          <Key>
+            <PropertyRef Name="makbuz_id" />
+          </Key>
+          <Property Name="makbuz_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="islem_id" Type="int" Nullable="false" />
+          <Property Name="makbuz_islemi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="makbuz_ucreti" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="musteri_Tc" />
+          </Key>
+          <Property Name="musteri_adi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="musteri_soyadi" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="musteri_adres" Type="nvarchar" MaxLength="30" />
+          <Property Name="musteri_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="musteri_eposta" Type="nvarchar" MaxLength="60" />
+          <Property Name="musteri_tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="musteri_sifre" Type="nvarchar" MaxLength="15" />
+          <Property Name="musteri_resmi" Type="nvarchar" MaxLength="50" />
+          <Property Name="temsilci_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Musteri_Temsilcisi">
+          <Key>
+            <PropertyRef Name="temsilci_Tc" />
+          </Key>
+          <Property Name="temsilci_adi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="temsilci_soyadi" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="temsilci_adres" Type="nvarchar" MaxLength="30" />
+          <Property Name="temsilci_Tc" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="temsilci_eposta" Type="nvarchar" MaxLength="60" />
+          <Property Name="temsilci_tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="temsilci_sifre" Type="nvarchar" MaxLength="15" />
+          <Property Name="temsilci_resmi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Banka_Banka_Toplam">
+          <End Role="Banka_Toplam" Type="Self.Banka_Toplam" Multiplicity="1" />
+          <End Role="Banka" Type="Self.Banka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banka_Toplam">
+              <PropertyRef Name="durum_id" />
+            </Principal>
+            <Dependent Role="Banka">
+              <PropertyRef Name="durum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banka_Muduru_Banka">
+          <End Role="Banka" Type="Self.Banka" Multiplicity="1" />
+          <End Role="Banka_Muduru" Type="Self.Banka_Muduru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banka">
+              <PropertyRef Name="banka_id" />
+            </Principal>
+            <Dependent Role="Banka_Muduru">
+              <PropertyRef Name="banka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hesaplar_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="Hesaplar" Type="Self.Hesaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="Hesaplar">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_İslemler_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="İslemler">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_İslemler_Musteri_Temsilcisi">
+          <End Role="Musteri_Temsilcisi" Type="Self.Musteri_Temsilcisi" Multiplicity="1" />
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri_Temsilcisi">
+              <PropertyRef Name="temsilci_Tc" />
+            </Principal>
+            <Dependent Role="İslemler">
+              <PropertyRef Name="temsilci_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kredi_Borclari_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="Kredi_Borclari" Type="Self.Kredi_Borclari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="Kredi_Borclari">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Makbuz_İslemler">
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="1" />
+          <End Role="Makbuz" Type="Self.Makbuz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="İslemler">
+              <PropertyRef Name="islem_id" />
+            </Principal>
+            <Dependent Role="Makbuz">
+              <PropertyRef Name="islem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Musteri_Temsilcisi">
+          <End Role="Musteri_Temsilcisi" Type="Self.Musteri_Temsilcisi" Multiplicity="1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri_Temsilcisi">
+              <PropertyRef Name="temsilci_Tc" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="temsilci_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="son5islem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="son5makbuz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="BankaModelStoreContainer">
+          <EntitySet Name="Banka" EntityType="Self.Banka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banka_Muduru" EntityType="Self.Banka_Muduru" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banka_Toplam" EntityType="Self.Banka_Toplam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hesaplar" EntityType="Self.Hesaplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="İslemler" EntityType="Self.İslemler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kredi_Borclari" EntityType="Self.Kredi_Borclari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanıcılar" EntityType="Self.Kullanıcılar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kur" EntityType="Self.Kur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Makbuz" EntityType="Self.Makbuz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Musteri_Temsilcisi" EntityType="Self.Musteri_Temsilcisi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Banka_Banka_Toplam" Association="Self.FK_Banka_Banka_Toplam">
+            <End Role="Banka_Toplam" EntitySet="Banka_Toplam" />
+            <End Role="Banka" EntitySet="Banka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banka_Muduru_Banka" Association="Self.FK_Banka_Muduru_Banka">
+            <End Role="Banka" EntitySet="Banka" />
+            <End Role="Banka_Muduru" EntitySet="Banka_Muduru" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hesaplar_Musteri" Association="Self.FK_Hesaplar_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Hesaplar" EntitySet="Hesaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_İslemler_Musteri" Association="Self.FK_İslemler_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="İslemler" EntitySet="İslemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_İslemler_Musteri_Temsilcisi" Association="Self.FK_İslemler_Musteri_Temsilcisi">
+            <End Role="Musteri_Temsilcisi" EntitySet="Musteri_Temsilcisi" />
+            <End Role="İslemler" EntitySet="İslemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kredi_Borclari_Musteri" Association="Self.FK_Kredi_Borclari_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Kredi_Borclari" EntitySet="Kredi_Borclari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Makbuz_İslemler" Association="Self.FK_Makbuz_İslemler">
+            <End Role="İslemler" EntitySet="İslemler" />
+            <End Role="Makbuz" EntitySet="Makbuz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Musteri_Temsilcisi" Association="Self.FK_Musteri_Musteri_Temsilcisi">
+            <End Role="Musteri_Temsilcisi" EntitySet="Musteri_Temsilcisi" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Banka">
+          <Key>
+            <PropertyRef Name="banka_id" />
+          </Key>
+          <Property Name="banka_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="durum_id" Type="Int32" Nullable="false" />
+          <Property Name="banka_tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="banka_adresi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="banka_eposta" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Banka_Toplam" Relationship="Self.FK_Banka_Banka_Toplam" FromRole="Banka" ToRole="Banka_Toplam" />
+          <NavigationProperty Name="Banka_Muduru" Relationship="Self.FK_Banka_Muduru_Banka" FromRole="Banka" ToRole="Banka_Muduru" />
+        </EntityType>
+        <EntityType Name="Banka_Muduru">
+          <Key>
+            <PropertyRef Name="mudur_Tc" />
+          </Key>
+          <Property Name="banka_id" Type="Int32" Nullable="false" />
+          <Property Name="mudur_adi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_soyadi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_Tc" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_Adres" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_Eposta" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mudur_sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Banka" Relationship="Self.FK_Banka_Muduru_Banka" FromRole="Banka_Muduru" ToRole="Banka" />
+        </EntityType>
+        <EntityType Name="Banka_Toplam">
+          <Key>
+            <PropertyRef Name="durum_id" />
+          </Key>
+          <Property Name="durum_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ay" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gelir_durumu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gider_durumu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="toplam_bakiye" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Banka" Relationship="Self.FK_Banka_Banka_Toplam" FromRole="Banka_Toplam" ToRole="Banka" />
+        </EntityType>
+        <EntityType Name="Hesaplar">
+          <Key>
+            <PropertyRef Name="hesap_id" />
+          </Key>
+          <Property Name="hesap_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hesap_turu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hesap_bakiye" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Hesaplar_Musteri" FromRole="Hesaplar" ToRole="Musteri" />
+        </EntityType>
+        <EntityType Name="İslemler">
+          <Key>
+            <PropertyRef Name="islem_id" />
+          </Key>
+          <Property Name="islem_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="islem_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="islem_bakiye" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="islem_tarihi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="temsilci_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_İslemler_Musteri" FromRole="İslemler" ToRole="Musteri" />
+          <NavigationProperty Name="Musteri_Temsilcisi" Relationship="Self.FK_İslemler_Musteri_Temsilcisi" FromRole="İslemler" ToRole="Musteri_Temsilcisi" />
+          <NavigationProperty Name="Makbuz" Relationship="Self.FK_Makbuz_İslemler" FromRole="İslemler" ToRole="Makbuz" />
+        </EntityType>
+        <EntityType Name="Kredi_Borclari">
+          <Key>
+            <PropertyRef Name="kredi_id" />
+          </Key>
+          <Property Name="kredi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kredi_ayi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kredi_turu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kredi_miktari" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Kredi_Borclari_Musteri" FromRole="Kredi_Borclari" ToRole="Musteri" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="Tc" />
+          </Key>
+          <Property Name="Tc" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adı_Soyadı" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="tip" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kur">
+          <Key>
+            <PropertyRef Name="kur_id" />
+          </Key>
+          <Property Name="kur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kur_adi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kur_miktari" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Makbuz">
+          <Key>
+            <PropertyRef Name="makbuz_id" />
+          </Key>
+          <Property Name="makbuz_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="islem_id" Type="Int32" Nullable="false" />
+          <Property Name="makbuz_islemi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="makbuz_ucreti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="İslemler" Relationship="Self.FK_Makbuz_İslemler" FromRole="Makbuz" ToRole="İslemler" />
+        </EntityType>
+        <EntityType Name="Musteri">
+          <Key>
+            <PropertyRef Name="musteri_Tc" />
+          </Key>
+          <Property Name="musteri_adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_soyadi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_adres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="musteri_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="musteri_eposta" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="musteri_tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="musteri_sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="musteri_resmi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="temsilci_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Hesaplar" Relationship="Self.FK_Hesaplar_Musteri" FromRole="Musteri" ToRole="Hesaplar" />
+          <NavigationProperty Name="İslemler" Relationship="Self.FK_İslemler_Musteri" FromRole="Musteri" ToRole="İslemler" />
+          <NavigationProperty Name="Kredi_Borclari" Relationship="Self.FK_Kredi_Borclari_Musteri" FromRole="Musteri" ToRole="Kredi_Borclari" />
+          <NavigationProperty Name="Musteri_Temsilcisi" Relationship="Self.FK_Musteri_Musteri_Temsilcisi" FromRole="Musteri" ToRole="Musteri_Temsilcisi" />
+        </EntityType>
+        <EntityType Name="Musteri_Temsilcisi">
+          <Key>
+            <PropertyRef Name="temsilci_Tc" />
+          </Key>
+          <Property Name="temsilci_adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="temsilci_soyadi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="temsilci_adres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="temsilci_Tc" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="temsilci_eposta" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="temsilci_tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="temsilci_sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="temsilci_resmi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="İslemler" Relationship="Self.FK_İslemler_Musteri_Temsilcisi" FromRole="Musteri_Temsilcisi" ToRole="İslemler" />
+          <NavigationProperty Name="Musteri" Relationship="Self.FK_Musteri_Musteri_Temsilcisi" FromRole="Musteri_Temsilcisi" ToRole="Musteri" />
+        </EntityType>
+        <Association Name="FK_Banka_Banka_Toplam">
+          <End Role="Banka_Toplam" Type="Self.Banka_Toplam" Multiplicity="1" />
+          <End Role="Banka" Type="Self.Banka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banka_Toplam">
+              <PropertyRef Name="durum_id" />
+            </Principal>
+            <Dependent Role="Banka">
+              <PropertyRef Name="durum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banka_Muduru_Banka">
+          <End Role="Banka" Type="Self.Banka" Multiplicity="1" />
+          <End Role="Banka_Muduru" Type="Self.Banka_Muduru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banka">
+              <PropertyRef Name="banka_id" />
+            </Principal>
+            <Dependent Role="Banka_Muduru">
+              <PropertyRef Name="banka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hesaplar_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="Hesaplar" Type="Self.Hesaplar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="Hesaplar">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_İslemler_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="İslemler">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_İslemler_Musteri_Temsilcisi">
+          <End Role="Musteri_Temsilcisi" Type="Self.Musteri_Temsilcisi" Multiplicity="1" />
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri_Temsilcisi">
+              <PropertyRef Name="temsilci_Tc" />
+            </Principal>
+            <Dependent Role="İslemler">
+              <PropertyRef Name="temsilci_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Makbuz_İslemler">
+          <End Role="İslemler" Type="Self.İslemler" Multiplicity="1" />
+          <End Role="Makbuz" Type="Self.Makbuz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="İslemler">
+              <PropertyRef Name="islem_id" />
+            </Principal>
+            <Dependent Role="Makbuz">
+              <PropertyRef Name="islem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kredi_Borclari_Musteri">
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="1" />
+          <End Role="Kredi_Borclari" Type="Self.Kredi_Borclari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri">
+              <PropertyRef Name="musteri_Tc" />
+            </Principal>
+            <Dependent Role="Kredi_Borclari">
+              <PropertyRef Name="musteri_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Musteri_Musteri_Temsilcisi">
+          <End Role="Musteri_Temsilcisi" Type="Self.Musteri_Temsilcisi" Multiplicity="1" />
+          <End Role="Musteri" Type="Self.Musteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteri_Temsilcisi">
+              <PropertyRef Name="temsilci_Tc" />
+            </Principal>
+            <Dependent Role="Musteri">
+              <PropertyRef Name="temsilci_Tc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banka" EntityType="Self.Banka" />
+          <EntitySet Name="Banka_Muduru" EntityType="Self.Banka_Muduru" />
+          <EntitySet Name="Banka_Toplam" EntityType="Self.Banka_Toplam" />
+          <EntitySet Name="Hesaplar" EntityType="Self.Hesaplar" />
+          <EntitySet Name="İslemler" EntityType="Self.İslemler" />
+          <EntitySet Name="Kredi_Borclari" EntityType="Self.Kredi_Borclari" />
+          <EntitySet Name="Kullanıcılar" EntityType="Self.Kullanıcılar" />
+          <EntitySet Name="Kur" EntityType="Self.Kur" />
+          <EntitySet Name="Makbuz" EntityType="Self.Makbuz" />
+          <EntitySet Name="Musteri" EntityType="Self.Musteri" />
+          <EntitySet Name="Musteri_Temsilcisi" EntityType="Self.Musteri_Temsilcisi" />
+          <AssociationSet Name="FK_Banka_Banka_Toplam" Association="Self.FK_Banka_Banka_Toplam">
+            <End Role="Banka_Toplam" EntitySet="Banka_Toplam" />
+            <End Role="Banka" EntitySet="Banka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banka_Muduru_Banka" Association="Self.FK_Banka_Muduru_Banka">
+            <End Role="Banka" EntitySet="Banka" />
+            <End Role="Banka_Muduru" EntitySet="Banka_Muduru" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hesaplar_Musteri" Association="Self.FK_Hesaplar_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Hesaplar" EntitySet="Hesaplar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_İslemler_Musteri" Association="Self.FK_İslemler_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="İslemler" EntitySet="İslemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_İslemler_Musteri_Temsilcisi" Association="Self.FK_İslemler_Musteri_Temsilcisi">
+            <End Role="Musteri_Temsilcisi" EntitySet="Musteri_Temsilcisi" />
+            <End Role="İslemler" EntitySet="İslemler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Makbuz_İslemler" Association="Self.FK_Makbuz_İslemler">
+            <End Role="İslemler" EntitySet="İslemler" />
+            <End Role="Makbuz" EntitySet="Makbuz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kredi_Borclari_Musteri" Association="Self.FK_Kredi_Borclari_Musteri">
+            <End Role="Musteri" EntitySet="Musteri" />
+            <End Role="Kredi_Borclari" EntitySet="Kredi_Borclari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Musteri_Musteri_Temsilcisi" Association="Self.FK_Musteri_Musteri_Temsilcisi">
+            <End Role="Musteri_Temsilcisi" EntitySet="Musteri_Temsilcisi" />
+            <End Role="Musteri" EntitySet="Musteri" />
+          </AssociationSet>
+          <FunctionImport Name="son5islem" EntitySet="İslemler" ReturnType="Collection(BankaModel.İslemler)" />
+          <FunctionImport Name="son5makbuz" EntitySet="Makbuz" ReturnType="Collection(BankaModel.Makbuz)" />
+        </EntityContainer>
+        <ComplexType Name="son5islem_Result">
+          <Property Type="Int32" Name="islem_id" Nullable="false" />
+          <Property Type="String" Name="islem_adi" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="islem_bakiye" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="islem_tarihi" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="musteri_Tc" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="temsilci_Tc" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="son5makbuz_Result">
+          <Property Type="Int32" Name="makbuz_id" Nullable="false" />
+          <Property Type="Int32" Name="islem_id" Nullable="false" />
+          <Property Type="String" Name="makbuz_islemi" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="makbuz_ucreti" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankaModelStoreContainer" CdmEntityContainer="BankaEntities1">
+          <EntitySetMapping Name="Banka">
+            <EntityTypeMapping TypeName="BankaModel.Banka">
+              <MappingFragment StoreEntitySet="Banka">
+                <ScalarProperty Name="banka_id" ColumnName="banka_id" />
+                <ScalarProperty Name="durum_id" ColumnName="durum_id" />
+                <ScalarProperty Name="banka_tel" ColumnName="banka_tel" />
+                <ScalarProperty Name="banka_adresi" ColumnName="banka_adresi" />
+                <ScalarProperty Name="banka_eposta" ColumnName="banka_eposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banka_Muduru">
+            <EntityTypeMapping TypeName="BankaModel.Banka_Muduru">
+              <MappingFragment StoreEntitySet="Banka_Muduru">
+                <ScalarProperty Name="banka_id" ColumnName="banka_id" />
+                <ScalarProperty Name="mudur_adi" ColumnName="mudur_adi" />
+                <ScalarProperty Name="mudur_soyadi" ColumnName="mudur_soyadi" />
+                <ScalarProperty Name="mudur_Tc" ColumnName="mudur_Tc" />
+                <ScalarProperty Name="mudur_Tel" ColumnName="mudur_Tel" />
+                <ScalarProperty Name="mudur_Adres" ColumnName="mudur_Adres" />
+                <ScalarProperty Name="mudur_Eposta" ColumnName="mudur_Eposta" />
+                <ScalarProperty Name="mudur_sifre" ColumnName="mudur_sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banka_Toplam">
+            <EntityTypeMapping TypeName="BankaModel.Banka_Toplam">
+              <MappingFragment StoreEntitySet="Banka_Toplam">
+                <ScalarProperty Name="durum_id" ColumnName="durum_id" />
+                <ScalarProperty Name="ay" ColumnName="ay" />
+                <ScalarProperty Name="gelir_durumu" ColumnName="gelir_durumu" />
+                <ScalarProperty Name="gider_durumu" ColumnName="gider_durumu" />
+                <ScalarProperty Name="toplam_bakiye" ColumnName="toplam_bakiye" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hesaplar">
+            <EntityTypeMapping TypeName="BankaModel.Hesaplar">
+              <MappingFragment StoreEntitySet="Hesaplar">
+                <ScalarProperty Name="hesap_id" ColumnName="hesap_id" />
+                <ScalarProperty Name="hesap_turu" ColumnName="hesap_turu" />
+                <ScalarProperty Name="hesap_bakiye" ColumnName="hesap_bakiye" />
+                <ScalarProperty Name="musteri_Tc" ColumnName="musteri_Tc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="İslemler">
+            <EntityTypeMapping TypeName="BankaModel.İslemler">
+              <MappingFragment StoreEntitySet="İslemler">
+                <ScalarProperty Name="islem_id" ColumnName="islem_id" />
+                <ScalarProperty Name="islem_adi" ColumnName="islem_adi" />
+                <ScalarProperty Name="islem_bakiye" ColumnName="islem_bakiye" />
+                <ScalarProperty Name="islem_tarihi" ColumnName="islem_tarihi" />
+                <ScalarProperty Name="musteri_Tc" ColumnName="musteri_Tc" />
+                <ScalarProperty Name="temsilci_Tc" ColumnName="temsilci_Tc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kredi_Borclari">
+            <EntityTypeMapping TypeName="BankaModel.Kredi_Borclari">
+              <MappingFragment StoreEntitySet="Kredi_Borclari">
+                <ScalarProperty Name="kredi_id" ColumnName="kredi_id" />
+                <ScalarProperty Name="kredi_ayi" ColumnName="kredi_ayi" />
+                <ScalarProperty Name="kredi_turu" ColumnName="kredi_turu" />
+                <ScalarProperty Name="kredi_miktari" ColumnName="kredi_miktari" />
+                <ScalarProperty Name="musteri_Tc" ColumnName="musteri_Tc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanıcılar">
+            <EntityTypeMapping TypeName="BankaModel.Kullanıcılar">
+              <MappingFragment StoreEntitySet="Kullanıcılar">
+                <ScalarProperty Name="Tc" ColumnName="Tc" />
+                <ScalarProperty Name="Adı_Soyadı" ColumnName="Adı_Soyadı" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="tip" ColumnName="tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kur">
+            <EntityTypeMapping TypeName="BankaModel.Kur">
+              <MappingFragment StoreEntitySet="Kur">
+                <ScalarProperty Name="kur_id" ColumnName="kur_id" />
+                <ScalarProperty Name="kur_adi" ColumnName="kur_adi" />
+                <ScalarProperty Name="kur_miktari" ColumnName="kur_miktari" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Makbuz">
+            <EntityTypeMapping TypeName="BankaModel.Makbuz">
+              <MappingFragment StoreEntitySet="Makbuz">
+                <ScalarProperty Name="makbuz_id" ColumnName="makbuz_id" />
+                <ScalarProperty Name="islem_id" ColumnName="islem_id" />
+                <ScalarProperty Name="makbuz_islemi" ColumnName="makbuz_islemi" />
+                <ScalarProperty Name="makbuz_ucreti" ColumnName="makbuz_ucreti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musteri">
+            <EntityTypeMapping TypeName="BankaModel.Musteri">
+              <MappingFragment StoreEntitySet="Musteri">
+                <ScalarProperty Name="musteri_adi" ColumnName="musteri_adi" />
+                <ScalarProperty Name="musteri_soyadi" ColumnName="musteri_soyadi" />
+                <ScalarProperty Name="musteri_adres" ColumnName="musteri_adres" />
+                <ScalarProperty Name="musteri_Tc" ColumnName="musteri_Tc" />
+                <ScalarProperty Name="musteri_eposta" ColumnName="musteri_eposta" />
+                <ScalarProperty Name="musteri_tel" ColumnName="musteri_tel" />
+                <ScalarProperty Name="musteri_sifre" ColumnName="musteri_sifre" />
+                <ScalarProperty Name="musteri_resmi" ColumnName="musteri_resmi" />
+                <ScalarProperty Name="temsilci_Tc" ColumnName="temsilci_Tc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Musteri_Temsilcisi">
+            <EntityTypeMapping TypeName="BankaModel.Musteri_Temsilcisi">
+              <MappingFragment StoreEntitySet="Musteri_Temsilcisi">
+                <ScalarProperty Name="temsilci_adi" ColumnName="temsilci_adi" />
+                <ScalarProperty Name="temsilci_soyadi" ColumnName="temsilci_soyadi" />
+                <ScalarProperty Name="temsilci_adres" ColumnName="temsilci_adres" />
+                <ScalarProperty Name="temsilci_Tc" ColumnName="temsilci_Tc" />
+                <ScalarProperty Name="temsilci_eposta" ColumnName="temsilci_eposta" />
+                <ScalarProperty Name="temsilci_tel" ColumnName="temsilci_tel" />
+                <ScalarProperty Name="temsilci_sifre" ColumnName="temsilci_sifre" />
+                <ScalarProperty Name="temsilci_resmi" ColumnName="temsilci_resmi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="son5islem" FunctionName="BankaModel.Store.son5islem">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="son5makbuz" FunctionName="BankaModel.Store.son5makbuz">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

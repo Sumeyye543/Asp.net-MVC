@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "MusteriEkle";
+}
+@using Banka.Models
+
+@model Musteri
+
+<div class="container-scroller">
+    @Html.Partial("PartialView");
+
+
+    <!-- partial -->
+    <div class="main-panel">
+            <div class="page-header">
+                <h3 class="page-title"> </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row">
+             
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Musteri @Session["durum"]</h4>
+                            <p class="card-description"> @Session["msa"] </p>
+                            @{ 
+                                Session["msa"] = "";
+                            }
+                            <form class="forms-sample" action="/Musteri/MusteriEkle" method="post" role="form">
+                   
+                            <div class="form-group">
+
+
+                                <label for="exampleInputName1">Müşteri Tc</label>
+                                @if (Model.musteri_Tc == null)
+                                {
+                                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Tc" name="musteri_Tc">
+                                }
+                                else
+                                {
+                                    <label> @Model.musteri_Tc </label>
+                                    <input type="hidden" name="musteri_Tc" value="@Model.musteri_Tc" />
+                                }
+                            </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Müşteri Adı</label>
+                                    @if (Model.musteri_adi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Adı" name="musteri_adi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_adi" type="text" class="form-control" id="exampleInputName1" placeholder="Adı" name="musteri_adi">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Müşteri Soyadı</label>
+                                    @if (Model.musteri_soyadi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Soyadı" name="musteri_soyadi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_soyadi" type="text" class="form-control" id="exampleInputName1" placeholder="Soyadı" name="musteri_soyadi">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Müşteri Adresi</label>
+                                    @if (Model.musteri_adres == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Adres" name="musteri_adres">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_adres" type="text" class="form-control" id="exampleInputName1" name="musteri_adres">
+
+                                    }
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Müşteri Eposta</label>
+                                    @if (Model.musteri_eposta == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Eposta" name="musteri_eposta">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_eposta" type="text" class="form-control" id="exampleInputName1" name="musteri_eposta">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Müşteri Telefonu</label>
+                                    @if (Model.musteri_tel == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Telefon" name="musteri_tel">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_tel" type="text" class="form-control" id="exampleInputName1" name="musteri_tel">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Müşteri Şifre</label>
+                                    @if (Model.musteri_sifre == null)
+                                    {
+                                        <input type="password" class="form-control" id="exampleInputEmail3" placeholder="Sifre" name="musteri_sifre">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_sifre" type="text" class="form-control" id="exampleInputName1" name="musteri_sifre">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="exampleInputCity1">Müşteri Resmi</label>
+                                    @if (Model.musteri_resmi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Resim Yolu" name="musteri_resmi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.musteri_resmi" type="text" class="form-control" id="exampleInputName1" placeholder="Adı" name="musteri_resmi">
+
+                                    }
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Temsilci</label>
+                                    @if (Model.temsilci_Tc == null)
+                                    {
+                                        <select class="form-control" name="temsilci_Tc">
+                                            @foreach (Musteri_Temsilcisi item in ViewBag.temsilci)
+                                            {
+                                                <option value="@item.temsilci_Tc">@item.temsilci_adi</option>
+                                            }
+                                        </select>
+
+                                    }
+                                    else
+                                    {
+
+                                        <select class="form-control" name="temsilci_Tc" value="@Model.temsilci_Tc">
+                                            @foreach (Musteri_Temsilcisi item in ViewBag.temsilci)
+                                            {
+                                                <option value="@item.temsilci_Tc">@item.temsilci_adi</option>
+                                            }
+                                        </select>
+                                    }
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(function() {
+        var message = '@ViewBag.Message';
+        if (message  != '')
+            swal({ title: "Done", text: message , icon: "error" });
+
+    });
+</script>
+
+
+
+

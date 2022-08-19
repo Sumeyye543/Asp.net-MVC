@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "TemsilciEkle";
+}
+@using Banka.Models
+@model Musteri_Temsilcisi
+
+
+<div class="container-scroller">
+    @Html.Partial("PartialView");
+
+
+    <!-- partial -->
+    <div class="main-panel">
+            <div class="page-header">
+                <h3 class="page-title"> </h3>
+                <nav aria-label="breadcrumb">
+                  
+                </nav>
+            </div>
+            <div class="row">
+              
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Musteri Temsilcisi @Session["durum"]</h4>
+                            
+                            <p class="card-title"> @Session["msg"] </p>
+                            @{ 
+                                Session["msg"] = "";
+                            }
+                            <form class="forms-sample" action="/Temsilci/Ekle" method="post" role="form">
+
+                                <div class="form-group">
+
+
+                                    <label for="exampleInputName1">Temsilci Tc</label>
+                                    @if (Model.temsilci_Tc == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Tc" name="temsilci_Tc">
+                                    }
+                                    else
+                                    {
+                                        <label>@Model.temsilci_Tc </label>
+                                        <input type="hidden" name="temsilci_Tc" value="@Model.temsilci_Tc" />
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Temsilci Adı</label>
+                                    @if (Model.temsilci_adi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Adı" name="temsilci_adi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_adi" type="text" class="form-control" id="exampleInputName1" placeholder="Adı" name="temsilci_adi">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Temsilci Soyadı</label>
+                                    @if (Model.temsilci_soyadi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Soyadı" name="temsilci_soyadi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_soyadi" type="text" class="form-control" id="exampleInputName1" placeholder="Soyadı" name="temsilci_soyadi">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">Temsilci Adresi</label>
+                                    @if (Model.temsilci_adres == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Adres" name="temsilci_adres">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_adres" type="text" class="form-control" id="exampleInputName1" name="temsilci_adres">
+
+                                    }
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Temsilci Eposta</label>
+                                    @if (Model.temsilci_eposta == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Eposta" name="temsilci_eposta">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_eposta" type="text" class="form-control" id="exampleInputName1" name="temsilci_eposta">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Temsilci Telefonu</label>
+                                    @if (Model.temsilci_tel == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Telefon" name="temsilci_tel">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_tel" type="text" class="form-control" id="exampleInputName1" name="temsilci_tel">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputCity1">Temsilci Şifre</label>
+                                    @if (Model.temsilci_sifre == null)
+                                    {
+                                        <input type="password" class="form-control" id="exampleInputEmail3" placeholder="Sifre" name="temsilci_sifre">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_sifre" type="text" class="form-control" id="exampleInputName1" name="temsilci_sifre">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="exampleInputCity1">Temsilci Resmi</label>
+                                    @if (Model.temsilci_resmi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Resim Yolu" name="temsilci_resmi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.temsilci_resmi" type="text" class="form-control" id="exampleInputName1" placeholder="Adı" name="temsilci_resmi">
+
+                                    }
+                                </div>
+
+
+
+                                <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+

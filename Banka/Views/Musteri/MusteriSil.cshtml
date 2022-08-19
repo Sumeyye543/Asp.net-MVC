@@ -1,0 +1,134 @@
+﻿
+@using Banka.Models
+@model List<Musteri>
+@{
+    ViewBag.Title = "MusteriSil";
+}
+
+
+
+<div class="container-scroller">
+    @Html.Partial("PartialView");
+
+    <div class="row ">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Müşteriler</h4>
+                    <div class="table-responsive">
+                        <div class="block-controls">
+                            <span aria-hidden="true" class="icon icon-cross icon-size-medium block-control-remove"></span>
+                            <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check form-check-muted m-0">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input">
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th> Müşteri Tc </th>
+                                    <th> Müşteri Adı </th>
+                                    <th> Müşteri Soyadı </th>
+                                    <th> Müşteri Eposta </th>
+                                    <th> Müşteri Adres </th>
+                                    <th> Müşteri Telefonu </th>
+                                    <th> Müşteri sifre </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check form-check-muted m-0">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td>@item.musteri_Tc </td>
+                                        <td>
+                                            <img src=@item.musteri_resmi alt="image" />
+                                            <span class="pl-2">@item.musteri_adi</span>
+                                        </td>
+                                        <td> @item.musteri_soyadi </td>
+                                        <td> @item.musteri_eposta </td>
+                                        <td> @item.musteri_adres </td>
+                                        <td> @item.musteri_tel </td>
+                                        <td>
+                                            <div class="badge badge-outline-success">@item.musteri_sifre</div>
+                                        </td>
+
+                                        <td> <a href="#" data-id="@item.musteri_Tc" class="btn btn-info mstSil"> Sil </a>  </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript" src="/Content/assets/js/required/jquery-1.11.1.min.js"></script>
+
+    <script>
+        $(".mstSil").click(function () {
+
+            var sonuc = confirm("Kayıt silinsin mi?");
+
+            if (sonuc) {
+
+
+                var mstID = $(this).attr("data-id");
+        
+                
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "/Musteri/Sil/" + mstID,
+                            success: function () {
+
+                                alert("kayıt silindi");
+                                window.location.replace("/Musteri/MusteriSil");
+                            },
+                            error: function () {
+                                alert("silme sırasında hata oluştu");
+                            }
+
+
+                        });
+                
+              
+
+            }
+            else {
+
+                alert("Silme işlemi iptal edildi");
+            }
+
+        });
+
+
+
+
+    </script>
+
+}
+
+
+
+
+

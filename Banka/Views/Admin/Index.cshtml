@@ -1,0 +1,850 @@
+﻿
+@using Banka.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+@model ViewModel
+
+
+<body>
+    <div class="container-scroller">
+        @Html.Partial("PartialView");
+
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card corona-gradient-card">
+                        <div class="card-body py-0 px-0 px-sm-3">
+                            <div class="row align-items-center">
+                                <div class="col-4 col-sm-3 col-xl-2">
+                                    <img class="gradient-corona-img img-fluid" alt="">
+                                </div>
+
+                                <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (User.IsInRole("A") || User.IsInRole("M"))
+            {
+
+
+                <div class="row">
+                    @foreach (var item in Model.KurList)
+                    {
+                        if (@item.kur_adi != "TR")
+                        {
+                            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <div class="d-flex align-items-center align-self-start">
+                                                    <h3 class="mb-0">@item.kur_miktari</h3>
+                                                    <p class="text-success ml-2 mb-0 font-weight-medium">+</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="icon icon-box-success ">
+                                                    <span class="mdi mdi-arrow-top-right icon-item"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted font-weight-normal">@item.kur_adi</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+            }
+            @if (User.IsInRole("A") || User.IsInRole("T"))
+            {
+                <div class="row">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="card-title">Bankanın Aylara Göre Gelir Durumu</h4>
+                                <link href="~/Content/assets/js/apexcharts.css" />
+
+
+                                <div id="donut-chart" class=""></div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+            @if (User.IsInRole("A") || User.IsInRole("T"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h4 class="card-title mb-1">Bankadaki Son İşlemler</h4>
+                                    <p class="text-muted mb-1">Son 5 İşlem</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="preview-list">
+                                            @foreach (var item in Model.IslemlerList)
+                                            {
+                                                <div class="preview-item border-bottom">
+                                                    <div class="preview-thumbnail">
+                                                        <div class="preview-icon bg-primary">
+                                                            <i class="mdi mdi-file-document"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                                        <div class="flex-grow">
+                                                            <h6 class="preview-subject">@item.islem_adi</h6>
+                                                            <p class="text-muted mb-0">Temsilci Tc:@item.temsilci_Tc</p>
+
+                                                        </div>
+
+                                                        <div class="me-auto text-sm-right pt-2 pt-sm-0">
+
+                                                            <p class="text-muted">@item.islem_tarihi</p>
+                                                            <p class="text-muted mb-0">Bakiye=@item.islem_bakiye </p>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("T"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h4 class="card-title mb-1">Son 5 Makbuz</h4>
+                                    <p class="text-muted mb-1">Son 5 İşlem</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="preview-list">
+                                            @foreach (var item in Model.MakbuzList)
+                                            {
+                                                <div class="preview-item border-bottom">
+                                                    <div class="preview-thumbnail">
+                                                        <div class="preview-subject bg-dark">
+                                                            <i class="mdi mdi-file-document"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                                        <div class="flex-grow">
+                                                            <h6 class="preview-subject">@item.makbuz_islemi</h6>
+                                                            <p class="text-muted mb-0">İslem:@item.İslemler.islem_adi</p>
+
+                                                        </div>
+
+                                                        <div class="me-auto text-sm-right pt-2 pt-sm-0">
+
+                                                            <p class="text-muted">@item.İslemler.islem_tarihi</p>
+                                                            <p class="text-muted mb-0">Bakiye=@item.makbuz_ucreti </p>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("A"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Müşteriler</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Müşteri Tc </th>
+                                                <th> Müşteri Adı </th>
+                                                <th> Müşteri Soyadı </th>
+                                                <th> Müşteri Eposta </th>
+                                                <th> Müşteri Adres </th>
+                                                <th> Müşteri Telefonu </th>
+                                                <th> Müşteri sifre </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.MusteriList)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check form-check-muted m-0">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+
+
+                                                    <td>@item.musteri_Tc </td>
+                                                    <td>
+                                                        <img src=@item.musteri_resmi alt="image" />
+                                                        <span class="pl-2">@item.musteri_adi</span>
+                                                    </td>
+                                                    <td> @item.musteri_soyadi </td>
+                                                    <td> @item.musteri_eposta </td>
+                                                    <td> @item.musteri_adres </td>
+                                                    <td> @item.musteri_tel </td>
+                                                    <td>
+                                                        <div class="badge badge-outline-success">@item.musteri_sifre</div>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+            @if (User.IsInRole("A"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Müşteri Temsilcileri</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Temsilci Tc </th>
+                                                <th> Temsilci Adı </th>
+                                                <th> Temsilci Soyadı </th>
+                                                <th> Temsilci Eposta </th>
+                                                <th> Temsilci Adres </th>
+                                                <th> Temsilci Telefonu </th>
+                                                <th> Temsilci sifre </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.MusteriTemsilcisiList)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check form-check-muted m-0">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>@item.temsilci_Tc </td>
+                                                    <td>
+                                                        <img src=@item.temsilci_resmi alt="image" />
+                                                        <span class="pl-2">@item.temsilci_adi</span>
+                                                    </td>
+                                                    <td> @item.temsilci_soyadi </td>
+                                                    <td> @item.temsilci_eposta </td>
+                                                    <td> @item.temsilci_adres </td>
+                                                    <td> @item.temsilci_tel </td>
+                                                    <td>
+                                                        <div class="badge badge-outline-success">@item.temsilci_sifre</div>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            @if (User.IsInRole("A"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Hesaplar</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Hesap İD </th>
+                                                <th> Musteri Tc </th>
+                                                <th> Hesap Turu </th>
+                                                <th> Hesap Bakiye </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.HesaplarList)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check form-check-muted m-0">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>@item.hesap_id </td>
+
+                                                    <td> @item.musteri_Tc </td>
+                                                    <td> @item.hesap_turu </td>
+                                                    <td> @item.hesap_bakiye </td>
+
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                }
+
+            @if (User.IsInRole("M"))
+            {
+                <div class="row">
+                    <div class="col-md-4 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Hesap Bakiyeleri</h4>
+                                <link href="~/Content/assets/js/apexcharts.css" />
+                                <div id="donut-chart" class=""></div>
+                                <h4 class="card-title">Hesaplar</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Hesap İD </th>
+                                                <th> Hesap Türü </th>
+                                                <th> Hesap Bakiye </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.KullaniciHesaplari)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check form-check-muted m-0">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>@item.hesap_id </td>
+                                                    <td> @item.hesap_turu </td>
+                                                    <td> @item.hesap_bakiye </td>
+
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-8 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <h4 class="card-title mb-1">Müşteri Bilgileri</h4>
+                                        <p class="text-muted mb-1">Your data status</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="preview-list">
+                                                @foreach (var item in Model.KullaniciBilgileri)
+                                                {
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Tc</h6>
+                                                                <p class="text-muted mb-0">@item.musteri_Tc</p>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Adı</h6>
+                                                                <p class="text-muted mb-0">@item.musteri_adi</p>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Soyadı</h6>
+                                                                <p class="text-muted mb-0">@item.musteri_soyadi</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Adres</h6>
+                                                                <p class="text-muted mb-0">@item.musteri_adres</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Telefonu</h6>
+                                                                <p class="text-muted mb-0">@item.musteri_tel</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Temsilcisi Adı</h6>
+                                                                <p class="text-muted mb-0">@item.Musteri_Temsilcisi.temsilci_adi</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Temsilcisi Soyadı</h6>
+                                                                <p class="text-muted mb-0">@item.Musteri_Temsilcisi.temsilci_soyadi</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">Müşteri Temsilcisi Eposta</h6>
+                                                                <p class="text-muted mb-0">@item.Musteri_Temsilcisi.temsilci_eposta</p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                }
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            @if (User.IsInRole("T"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Müşterilerimin Bilgileri</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Müşteri Tc </th>
+                                                <th> Musteri Adı </th>
+                                                <th> Musteri Soyadı </th>
+                                                <th> Müşteri Telefonu </th>
+                                                <th> Müşteri Eposta </th>
+                                                <th> Müşteri Adres </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.TemsilciMusteri)
+                                                {
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </td>
+
+                                                <td>@item.musteri_Tc </td>
+
+                                                <td> @item.musteri_adi  </td>
+                                                <td> @item.musteri_soyadi </td>
+                                                <td> @item.musteri_tel </td>
+                                                <td> @item.musteri_eposta </td>
+                                                <td> @item.musteri_adres </td>
+
+                                            </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                }
+
+            @if (User.IsInRole("T"))
+            {
+                <div class="row ">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Müşterilerimin Hesapları</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check form-check-muted m-0">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th> Hesap İD </th>
+                                                <th> Musteri Tc </th>
+                                                <th> Hesap Turu </th>
+                                                <th> Hesap Bakiye </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var item in Model.TemsilciHesaplari)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check form-check-muted m-0">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>@item.hesap_id </td>
+
+                                                    <td> @item.musteri_Tc </td>
+                                                    <td> @item.hesap_turu </td>
+                                                    <td> @item.hesap_bakiye </td>
+
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                }
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+    @if (User.IsInRole("A") || User.IsInRole("T"))
+    {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        @section scripts{
+            <script src="~/Content/assets/js/apexcharts.min.js"></script>
+            <script>
+                var donutChart;
+                var donut;
+                $(document).ready(function () {
+                    GetData();
+                });
+                function GetData() {
+                    $.ajax({
+                        url: '/Admin/GetChartData/',
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            //console.log(data);
+                            if (data.success) {
+                                if (data.series.length > 0) {
+                                    LoadChart(data.series, data.labels);
+                                } else {
+                                }
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (reponse) {
+                            console.log(reponse);
+                            alert("error : " + reponse);
+                        }
+                    });
+                }
+                function LoadChart(series, labels) {
+                    // Donut Chart
+                    donutChart = {
+                        chart: {
+                            height: 350,
+                            type: 'donut',
+                            toolbar: {
+                                show: false,
+                            }
+                        },
+                        series: series,
+                        labels: labels,
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 305
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                    donut = new ApexCharts(
+                        document.querySelector("#donut-chart"),
+                        donutChart
+                    );
+                    donut.render();
+                }
+            </script>
+        }
+    }
+    @if (User.IsInRole("M"))
+    {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        @section scripts{
+            <script src="~/Content/assets/js/apexcharts.min.js"></script>
+            <script>
+                var donutChart;
+                var donut;
+                $(document).ready(function () {
+                    GetData();
+                });
+                function GetData() {
+                    $.ajax({
+                        url: '/Musteri/GetChartData/@Session["Tc"]',
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            //console.log(data);
+                            if (data.success) {
+                                if (data.series.length > 0) {
+                                    LoadChart(data.series, data.labels);
+                                } else {
+                                }
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (reponse) {
+                            console.log(reponse);
+                            alert("error : " + reponse);
+                        }
+                    });
+                }
+                function LoadChart(series, labels) {
+                    // Donut Chart
+                    donutChart = {
+                        chart: {
+                            height: 350,
+                            type: 'donut',
+                            toolbar: {
+                                show: false,
+                            }
+                        },
+                        series: series,
+                        labels: labels,
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 305
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                    donut = new ApexCharts(
+                        document.querySelector("#donut-chart"),
+                        donutChart
+                    );
+                    donut.render();
+                }
+            </script>
+        }
+    }
+</body>

@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Makbuzekle";
+}
+@using Banka.Models
+
+@model Makbuz
+
+<div class="container-scroller">
+    @Html.Partial("PartialView");
+
+
+    <!-- partial -->
+    <div class="main-panel">
+            <div class="page-header">
+                <h3 class="page-title"> </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="row">
+                @ViewBag.Message
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Makbuz Ekle</h4>
+                            <p class="card-description">  </p>
+                            <form class="forms-sample" action="/Makbuz/MakbuzEkle" method="post" role="form">
+                                @if (Model != null)
+                                {
+                                    <input type="hidden" name="makbuz_id" value="@Model.makbuz_id" />
+                                }
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Makbuz İşlemi</label>
+                                    @if (Model.makbuz_islemi == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="İşlem Adı" name="makbuz_islemi">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.makbuz_islemi" type="text" class="form-control" id="exampleInputName1" placeholder="İşlem Adı" name="makbuz_islemi">
+
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword4">İşlem Bakiye</label>
+                                    @if (Model.makbuz_ucreti == null)
+                                    {
+                                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Bakiye" name="makbuz_ucreti">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.makbuz_islemi" type="text" class="form-control" id="exampleInputName1" placeholder="Bakiye" name="makbuz_islemi">
+
+                                    }
+                                </div>
+           
+
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">işlemler</label>
+                                                                 
+                                       <select class="form-control" name="islem_id" value="@Model.islem_id">
+                                            @foreach (İslemler item in ViewBag.islemler)
+                                            {
+                                                <option value="@item.islem_id">@item.islem_adi @item.islem_id </option>
+                                            }
+                                        </select>
+                                    
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    $(function() {
+        var message = '@ViewBag.Message';
+        if (message  != '')
+            swal({ title: "Done", text: message , icon: "error" });
+
+    });
+</script>
+
+
+
+
